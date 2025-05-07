@@ -1,0 +1,21 @@
+order_id,product_id,product_name,category,price,quantity,dt_sale,customer_id,payment_method,store_id
+1,360,Suco Natural,Alimentos,153.26,2,2025-04-01,1005,Cartão de Crédito,1
+2,262,Mochila Casual,Acessórios,168.36,2,2025-04-15,1003,Cartão de Crédito,3
+3,250,Cinto de Couro,Acessórios,154.25,5,2025-04-08,1006,Cartão de Crédito,3
+4,375,Cinto de Couro,Acessórios,38.48,1,2025-04-15,1003,Cartão de Crédito,1
+5,126,Macarrão,Alimentos,147.18,3,2025-04-02,1001,Boleto,2
+6,168,Bolo de Chocolate,Alimentos,83.65,3,2025-04-06,1002,Dinheiro,3
+7,370,Bolo de Chocolate,Alimentos,188.6,5,2025-04-10,1008,Dinheiro,3
+8,222,Camiseta Básica,Roupas,132.82,1,2025-04-15,1003,Pix,3
+9,376,Saia Longa,Roupas,139.18,1,2025-04-13,1006,Pix,1
+10,299,Colar de Prata,Acessórios,41.47,4,2025-04-10,1007,Cartão de Débito,2
+11,127,Macarrão,Alimentos,151.32,2,2025-04-05,1001,Cartão de Crédito,1
+12,369,Refrigerante,Alimentos,28.36,4,2025-04-04,1008,Cartão de Crédito,2
+13,205,Calça Jeans,Roupas,27.11,5,2025-04-10,1007,Boleto,2
+14,344,Café,Alimentos,134.07,1,2025-04-15,1007,Boleto,2
+15,395,Cinto de Couro,Acessórios,89.88,3,2025-04-02,1003,Cartão de Crédito,3
+16,205,Pão Francês,Alimentos,43.57,2,2025-04-02,1009,Dinheiro,2
+17,263,Vestido Floral,Roupas,149.45,2,2025-04-14,1003,Boleto,2
+18,145,Camiseta Polo,Roupas,149.46,4,2025-04-14,1009,Pix,1
+19,262,Suco Natural,Alimentos,171.33,5,2025-04-10,1006,Pix,1
+20,252,Óculos de Sol,Acessórios,96.5,4,2025-04-06,1004,Boleto,3

@@ -1,0 +1,18 @@
+#   Project Requirements Document: Gerador de Relatórios de Vendas
+
+A tabela a seguir lista os detalhes funcionais e dependências do Gerador de Relatórios de Vendas.
+
+|   Requirement ID   |   Description   |   User Story   |   Expected Behavior/Outcome   |
+| :----------------- | :------------ | :------------- | :--------------------------- |
+|   FR001   |   Carregar Configuração   |   Como um sistema, eu quero carregar o arquivo `config.json` para determinar as fontes de dados.   |   O sistema deve ler e analisar o arquivo `config.json` e armazenar as informações das fontes de dados. Se o arquivo não existir ou for inválido, o sistema deve registrar o erro e encerrar a execução ou fornecer uma mensagem de erro clara.   |
+|   FR002   |   Definir Interface de Fonte de Dados   |   Como um desenvolvedor, eu quero uma interface `DataSource` para padronizar a extração de dados.   |   O sistema deve definir uma classe abstrata `DataSource` com um método abstrato `extract_data()` para que subclasses possam implementar a extração de dados de diferentes fontes.   |
+|   FR003   |   Implementar Fonte de Dados Local   |   Como um sistema, eu quero poder extrair dados de arquivos locais.   |   O sistema deve implementar uma classe `LocalDataSource` que herda de `DataSource` e extrai dados de arquivos (inicialmente CSV).   |
+|   FR004   |   Implementar Fonte de Dados Web   |   Como um sistema, eu quero poder extrair dados de fontes web.   |   O sistema deve implementar uma classe `WebDataSource` que herda de `DataSource` e extrai dados de fontes web.   |
+|   FR005   |   Implementar Consolidação de Dados   |   Como um sistema, eu quero consolidar dados de várias fontes em um formato unificado.   |   O sistema deve implementar uma classe `SalesData` que recebe uma lista de `DataSource`s, extrai os dados de cada uma e os consolida em uma lista de dicionários.   |
+|   FR006   |   Definir Interface de Formatador de Relatório   |   Como um desenvolvedor, eu quero uma interface `ReportFormatter` para padronizar a formatação de relatórios.   |   O sistema deve definir uma classe abstrata `ReportFormatter` com um método abstrato `format_report()` para que subclasses possam implementar a formatação em diferentes formatos.   |
+|   FR007   |   Implementar Formatador de Texto   |   Como um sistema, eu quero gerar relatórios em texto simples.   |   O sistema deve implementar uma classe `TextReportFormatter` que herda de `ReportFormatter` e gera relatórios em texto.   |
+|   FR008   |   Implementar Formatador HTML   |   Como um sistema, eu quero gerar relatórios em HTML.   |   O sistema deve implementar uma classe `HTMLReportFormatter` que herda de `ReportFormatter` e gera relatórios em HTML.   |
+|   FR009   |   Implementar Formatador Markdown   |   Como um sistema, eu quero gerar relatórios em Markdown.   |   O sistema deve implementar uma classe `MarkdownReportFormatter` que herda de `ReportFormatter` e gera relatórios em Markdown.   |
+|   FR010   |   Implementar Formatador CSV   |   Como um sistema, eu quero gerar relatórios em CSV.   |   O sistema deve implementar uma classe `CSVReportFormatter` que herda de `ReportFormatter` e gera relatórios em CSV.   |
+|   FR011   |   Orquestrar o Fluxo de Trabalho   |   Como um sistema, eu quero orquestrar o processo de geração de relatórios.   |   O sistema deve ter um ponto de entrada (por exemplo, a função `main()` em `main.py`) que: carrega a configuração, cria as fontes de dados, consolida os dados e gera os relatórios nos formatos desejados.   |
+|   FR012   |   Distribuir como Executável   |   Como um sistema, eu quero ser distribuído como um executável.   |   O sistema deve ser empacotado como um executável usando PyInstaller.   |

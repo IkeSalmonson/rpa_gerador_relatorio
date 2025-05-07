@@ -1,0 +1,21 @@
+order_id,product_id,product_name,category,price,quantity,discount,dt_sale,customer_id,customer_name,payment_method,store_id
+1,207,Cinto de Couro,Acessórios,144.88,4,0.04,2025-04-12,1003,Sr. Juan da Mata,Cartão de Débito,2
+2,292,Arroz,Alimentos,50.55,3,0.15,2025-04-06,1007,Paulo Sousa,Cartão de Débito,2
+3,235,Macarrão,Alimentos,137.34,4,0.1,2025-04-06,1006,Maitê da Costa,Cartão de Débito,3
+4,244,Camiseta Polo,Roupas,35.36,1,0.01,2025-04-15,1010,Dra. Eduarda Martins,Pix,2
+5,262,Arroz,Alimentos,73.76,4,0.08,2025-04-11,1010,Diego Câmara,Cartão de Débito,3
+6,168,Mochila Casual,Acessórios,147.69,3,0.18,2025-04-12,1004,Vitória Dias,Boleto,3
+7,160,Pão Francês,Alimentos,188.84,1,0.01,2025-04-10,1008,Pietro Vieira,Cartão de Crédito,1
+8,325,Calça Jeans,Roupas,121.31,1,0.13,2025-04-13,1001,Sr. Joaquim Câmara,Cartão de Débito,3
+9,271,Bolo de Chocolate,Alimentos,145.33,3,0.12,2025-04-07,1001,Anthony da Costa,Cartão de Crédito,2
+10,374,Refrigerante,Alimentos,158.62,4,0.01,2025-04-14,1003,Melina Rodrigues,Pix,1
+11,269,Suco Natural,Alimentos,34.48,4,0.06,2025-04-03,1008,Thomas Alves,Cartão de Débito,2
+12,275,Café,Alimentos,29.81,4,0.07,2025-04-02,1001,Pedro Lucas Sampaio,Dinheiro,2
+13,391,Café,Alimentos,169.27,1,0.09,2025-04-08,1004,Otávio Pires,Cartão de Crédito,1
+14,371,Arroz,Alimentos,170.28,5,0.18,2025-04-06,1002,Breno Novais,Cartão de Crédito,1
+15,370,Mochila Casual,Acessórios,94.44,3,0.09,2025-04-11,1010,Cecilia Cunha,Cartão de Crédito,2
+16,158,Feijão,Alimentos,72.78,3,0.03,2025-04-15,1006,Manuela da Paz,Boleto,2
+17,228,Camiseta Básica,Roupas,112.25,3,0.17,2025-04-02,1002,Dante Rocha,Boleto,1
+18,393,Vestido Floral,Roupas,67.96,4,0.11,2025-04-07,1009,Sra. Maria Flor Dias,Dinheiro,1
+19,147,Colar de Prata,Acessórios,43.56,4,0.17,2025-04-13,1004,Dr. Arthur Sá,Cartão de Crédito,3
+20,320,Cinto de Couro,Acessórios,67.13,2,0.19,2025-04-12,1003,Brayan Mendes,Cartão de Crédito,3

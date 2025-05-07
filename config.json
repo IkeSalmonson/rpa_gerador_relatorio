@@ -1,0 +1,16 @@
+{
+    "sources": [
+      {
+        "type": "local",
+        "location": "vendas.csv"
+      },
+      {
+        "type": "web",
+        "location": "https://exemplo.com/vendas",
+        "credentials": {
+          "username": "usuario",
+          "password": "senha"
+        }
+      }
+    ]
+  }

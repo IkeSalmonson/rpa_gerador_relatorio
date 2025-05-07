@@ -1,0 +1,21 @@
+order_id,product_id,product_name,category,price,quantity,discount,dt_sale,customer_id,customer_name,payment_method,store_id
+1,392,Feijão,Alimentos,111.04,3,0.2,2025-04-05,1005,Dra. Cecília Montenegro,Dinheiro,1
+2,320,Cinto de Couro,Acessórios,103.57,3,0.19,2025-04-13,1007,Dr. José Miguel Castro,Cartão de Crédito,1
+3,315,Saia Longa,Roupas,119.27,4,0.1,2025-04-06,1006,Vitor Gabriel Farias,Dinheiro,3
+4,329,Camiseta Polo,Roupas,23.68,4,0.05,2025-04-14,1001,Sra. Mariah da Rocha,Boleto,1
+5,128,Saia Longa,Roupas,192.65,4,0.18,2025-04-06,1002,Isabel Ramos,Boleto,1
+6,162,Camiseta Polo,Roupas,151.51,2,0.04,2025-04-01,1004,Ana Lívia Fogaça,Cartão de Débito,3
+7,188,Cinto de Couro,Acessórios,29.51,3,0.0,2025-04-09,1005,Stella Caldeira,Cartão de Débito,3
+8,105,Calça Jeans,Roupas,144.9,2,0.2,2025-04-05,1003,Sabrina Alves,Pix,2
+9,121,Óculos de Sol,Acessórios,90.42,5,0.16,2025-04-09,1008,Brenda Vieira,Dinheiro,2
+10,348,Chapéu de Palha,Acessórios,36.41,1,0.17,2025-04-03,1005,Valentina Borges,Cartão de Crédito,1
+11,339,Vestido Floral,Roupas,179.29,1,0.11,2025-04-05,1010,Ana Luiza Castro,Dinheiro,3
+12,115,Cinto de Couro,Acessórios,75.83,2,0.15,2025-04-13,1008,Ana Beatriz Santos,Boleto,1
+13,257,Suco Natural,Alimentos,37.44,2,0.09,2025-04-12,1008,Bento Costa,Cartão de Débito,2
+14,179,Camiseta Básica,Roupas,144.31,2,0.09,2025-04-01,1001,Dra. Allana Cirino,Dinheiro,3
+15,260,Camiseta Básica,Roupas,70.34,3,0.15,2025-04-06,1001,Mariana Melo,Dinheiro,1
+16,178,Colar de Prata,Acessórios,85.96,5,0.19,2025-04-03,1004,Giovanna Leão,Boleto,2
+17,304,Chapéu de Palha,Acessórios,100.48,5,0.14,2025-04-09,1005,Maria Helena da Paz,Dinheiro,3
+18,136,Cinto de Couro,Acessórios,171.38,1,0.15,2025-04-04,1002,Gustavo da Paz,Boleto,2
+19,244,Chapéu de Palha,Acessórios,44.67,4,0.01,2025-04-09,1010,Valentim Lima,Cartão de Crédito,3
+20,239,Refrigerante,Alimentos,115.29,4,0.18,2025-04-05,1001,Sarah Ribeiro,Dinheiro,1
