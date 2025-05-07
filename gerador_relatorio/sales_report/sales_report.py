@@ -3,8 +3,8 @@ Este módulo define a classe SalesReport para gerar relatórios de vendas
 a partir dos dados consolidados.
 """
 
-from gerador_relatorios.sales_data.sales_data import SalesData
-from gerador_relatorios.sales_report.report_formatter import ReportFormatter
+from gerador_relatorio.sales_data.sales_data import SalesData
+from gerador_relatorio.sales_report.report_formatter import ReportFormatter
 
 
 class SalesReport:

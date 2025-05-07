@@ -3,7 +3,7 @@ Este módulo define a interface abstrata ReportFormatter para formatar relatóri
 """
 
 from abc import ABC, abstractmethod
-from gerador_relatorios.sales_data.sales_data import SalesData
+from gerador_relatorio.sales_data.sales_data import SalesData
 from typing import Dict, Any, List
 
 

@@ -1,7 +1,7 @@
 import json
 from unittest.mock import mock_open, patch
  
-from gerador_relatorios.main import main
+from gerador_relatorio.main import main
 import io  # Para capturar stdout
 
 def test_config_file_not_found(capsys):
@@ -21,7 +21,7 @@ def test_config_file_valid(capsys):
     valid_config = {"sources": [{"type": "local", "location": "test.csv"}]}  # Configuração válida
     with patch("builtins.open", mock_open(read_data=json.dumps(valid_config))):
         with patch("json.load", return_value=valid_config):
-            with patch("gerador_relatorios.data_source.data_source.LocalDataSource.extract_data", return_value=[{"col1": "val1"}]):  # Mock extract_data
+            with patch("gerador_relatorio.data_source.data_source.LocalDataSource.extract_data", return_value=[{"col1": "val1"}]):  # Mock extract_data
                 main()
                 captured = capsys.readouterr()
                 assert "Relatório HTML:" in captured.out

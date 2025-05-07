@@ -6,7 +6,7 @@ a configuração do relatório, incluindo as fontes de dados.
 import json
 from typing import List
 
-from gerador_relatorios.data_source.data_source import DataSource
+from gerador_relatorio.data_source.data_source import DataSource
 
 
 class ReportConfig:

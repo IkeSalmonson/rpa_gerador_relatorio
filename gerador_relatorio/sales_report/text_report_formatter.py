@@ -1,48 +1,43 @@
 """
-Este módulo define a classe HTMLReportFormatter para formatar relatórios em HTML.
+Este módulo define a classe TextReportFormatter para formatar relatórios em texto.
 """
 
-from gerador_relatorios.sales_report.report_formatter import ReportFormatter
-from gerador_relatorios.sales_data.sales_data import SalesData
+from gerador_relatorio.sales_report.report_formatter import ReportFormatter
+from gerador_relatorio.sales_data.sales_data import SalesData
 from typing import Dict, Any, List
 
 
-class HTMLReportFormatter(ReportFormatter):
+class TextReportFormatter(ReportFormatter):
     """
-    Formatador de relatório para HTML.
+    Formatador de relatório para texto simples.
     """
 
     def format_report(self, data: SalesData) -> str:
         """
-        Formata os dados de vendas em um relatório HTML.
+        Formata os dados de vendas em um relatório de texto simples.
 
         Args:
             data (SalesData): Os dados de vendas a serem formatados.
 
         Returns:
-            str: O relatório em formato HTML.
+            str: O relatório em formato de texto.
         """
-        report = "<html><body><h1>Relatório de Vendas</h1><table>"
+        report = "--- Relatório de Vendas ---\n\n"
 
         # Obter as colunas disponíveis
         columns = data.available_columns
 
         # Criar o cabeçalho
-        report += "<tr>"
-        for col in columns:
-            report += f"<th>{col}</th>"
-        report += "</tr>"
+        header = " | ".join(columns)
+        report += header + "\n"
+        report += "-" * len(header) + "\n"
 
         # Adicionar os dados
         start_index = 1 if data.data and self._is_header_row(data.data[0]) else 0  # Nova linha
         for i in range(start_index, len(data.data)):                               # Nova linha
             sale = data.data[i]                                                    # Nova linha
-            report += "<tr>"
-            for col in columns:
-                report += f"<td>{str(sale.get(col, 'N/A'))}</td>"
-            report += "</tr>"
-
-        report += "</table></body></html>"
+            row = " | ".join(str(sale.get(col, 'N/A')) for col in columns)
+            report += row + "\n"
         return report
 
     def _is_header_row(self, row: Dict[str, Any]) -> bool:                        # Nova função

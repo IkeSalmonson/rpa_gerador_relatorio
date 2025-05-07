@@ -6,7 +6,7 @@ os dados de vendas extraídos das diferentes fontes de dados.
 from typing import List, Dict, Any, Optional
 from collections import defaultdict
 
-from gerador_relatorios.data_source.data_source import DataSource
+from gerador_relatorio.data_source.data_source import DataSource
 
 
 class SalesData:

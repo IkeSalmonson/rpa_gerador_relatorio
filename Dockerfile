@@ -2,7 +2,7 @@ FROM python:3.12.3-alpine3.19
 #python_playground
 
 
-WORKDIR /usr/share/gerador_relatorios
+WORKDIR /usr/share/gerador_relatorio
 COPY ./requirements.txt ../requirements.txt
 RUN  pip install -r ../requirements.txt
 
@@ -14,6 +14,6 @@ COPY ./pyproject.toml ../
 
 
 
-COPY ./gerador_relatorios ./
+COPY ./gerador_relatorio ./
 
 RUN pip install -e ../ 

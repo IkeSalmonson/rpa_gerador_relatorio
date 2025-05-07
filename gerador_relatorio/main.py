@@ -6,11 +6,11 @@ Ele orquestra o fluxo de trabalho, desde a leitura da configuração até a gera
 import json
 from typing import List
 
-from gerador_relatorios.data_source.data_source import DataSource, WebDataSource, LocalDataSource
-from gerador_relatorios.sales_data.sales_data import SalesData
-from gerador_relatorios.sales_report.sales_report import SalesReport
-from gerador_relatorios.sales_report.html_report_formatter import HTMLReportFormatter
-from gerador_relatorios.sales_report.text_report_formatter import TextReportFormatter
+from gerador_relatorio.data_source.data_source import DataSource, WebDataSource, LocalDataSource
+from gerador_relatorio.sales_data.sales_data import SalesData
+from gerador_relatorio.sales_report.sales_report import SalesReport
+from gerador_relatorio.sales_report.html_report_formatter import HTMLReportFormatter
+from gerador_relatorio.sales_report.text_report_formatter import TextReportFormatter
 
 
 def main():
