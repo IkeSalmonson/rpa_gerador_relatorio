@@ -69,6 +69,21 @@ class WebDataSource(DataSource):
         return []  # Por enquanto, retorna uma lista vazia
 
 
+#### Mover para o cabecalho do arquivo
+import csv
+from typing import List, Dict
+#from gerador_relatorios.data_source.data_source import DataSource, DataSourceError  # DataSourceError deve ser definido em algum lugar
+# Definindo a exceção DataSourceError
+class DataSourceError(Exception):
+    """
+    Exceção personalizada para erros relacionados à fonte de dados.
+    """
+    def __init__(self, message: str) -> None:
+        super().__init__(message)
+        self.message = message
+    # Implementação da exceção local       
+    
+
 class LocalDataSource(DataSource):
     """
     Classe para representar uma fonte de dados local.
@@ -82,7 +97,10 @@ class LocalDataSource(DataSource):
         Args:
             location (str): O caminho para o arquivo local.
         """
+        #self.location = location
         super().__init__(type="local", location=location)
+        
+
 
     def extract_data(self) -> list:
         """
@@ -92,5 +110,16 @@ class LocalDataSource(DataSource):
         Returns:
             list: Uma lista de dicionários representando os dados extraídos.
         """
-        # Implementação da leitura de dados de arquivos locais (CSV, etc.)
-        return []  # Por enquanto, retorna uma lista vazia
+        # Implementação da leitura de dados de arquivos locais (CSV, etc.)    def extract_data(self) -> List[Dict]:
+        data = []
+        try:
+            with open(self.location, 'r', encoding='utf-8') as file:  # Ajuste a codificação se necessário
+                reader = csv.DictReader(file)
+                for row in reader:
+                    data.append(dict(row))  # Converte OrderedDict para dict
+        except FileNotFoundError:
+            raise DataSourceError(f"Arquivo não encontrado: {self.location}")
+        except csv.Error as e:
+            raise DataSourceError(f"Erro ao ler o arquivo CSV: {e}")
+        return data
+     

@@ -18,6 +18,7 @@ def main():
     Função principal para executar a POC de geração de relatórios de vendas.
     """
     # 1. Carregar a Configuração
+
     try:
         with open('config.json', 'r') as f:
             config_data = json.load(f)
