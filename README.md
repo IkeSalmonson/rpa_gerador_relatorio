@@ -43,11 +43,12 @@ Este projeto é um sistema que gera relatórios de vendas a partir de diferentes
     }
   ]
 }
+```
 
 ### Execução para desenvolvedor 
- ''' sh
+ ```sh
   python main.py
-'''
+```
 
 ## Demosntração de resultado
 
