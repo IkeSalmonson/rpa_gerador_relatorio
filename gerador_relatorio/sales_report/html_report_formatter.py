@@ -25,7 +25,7 @@ class HTMLReportFormatter(ReportFormatter):
         report = "<html><body><h1>Relatório de Vendas</h1><table>"
 
         # Obter as colunas disponíveis
-        columns = data.available_columns
+        columns = data['header_map'].keys()
 
         # Criar o cabeçalho
         report += "<tr>"
@@ -34,9 +34,9 @@ class HTMLReportFormatter(ReportFormatter):
         report += "</tr>"
 
         # Adicionar os dados
-        start_index = 1 if data.data and self._is_header_row(data.data[0]) else 0  # Nova linha
-        for i in range(start_index, len(data.data)):                               # Nova linha
-            sale = data.data[i]                                                    # Nova linha
+        start_index = 1 if data['data'] and self._is_header_row(data['data'][0]) else 0  # Nova linha
+        for i in range(start_index, len(data['data'])):                               # Nova linha
+            sale =  data['data'][i]                                                    # Nova linha
             report += "<tr>"
             for col in columns:
                 report += f"<td>{str(sale.get(col, 'N/A'))}</td>"

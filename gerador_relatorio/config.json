@@ -2,7 +2,7 @@
     "sources": [
       {
         "type": "local",
-        "location": "../data_example/vendas_especificas.csv"
+        "location": "./data_example/vendas_especificas.csv"
       }
 
     ]

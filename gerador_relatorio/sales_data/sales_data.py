@@ -30,8 +30,35 @@ class SalesData:
         self.data = data
         self.available_columns = available_columns
 
-    @classmethod
-    def consolidate_data(cls, sources: List[DataSource]) -> 'SalesData':
+    @staticmethod
+    def consolidate_header(sources: List[DataSource]) -> Dict[str, List[DataSource]]:
+        header_map: Dict[str, List[DataSource]] = {}
+        for source in sources:
+            data = source.extract_data()
+            if data:  # Check if data is not empty
+                for column in data[0].keys():
+                    if column not in header_map:
+                        header_map[column] = []
+                    header_map[column].append(source)
+        return header_map
+    @staticmethod
+    def compute_basic_statistics(data: List[Dict]) -> Dict[str, Dict[str, Any]]:
+        statistics: Dict[str, Dict[str, Any]] = {}
+        if not data:
+            return statistics
+
+        for column in data[0].keys():
+            values = [row.get(column) for row in data]
+            statistics[column] = {
+                "min": min((v for v in values if v is not None), default=None),
+                "max": max((v for v in values if v is not None), default=None),
+                "blank_count": sum(1 for v in values if v is None),
+            }
+        return statistics
+
+
+    @staticmethod
+    def consolidate_data(sources: List[DataSource]) -> Dict[str, Any]:
         """
         Consolida os dados de vendas de diferentes fontes de dados,
         lidando com diferentes conjuntos de colunas.
@@ -43,28 +70,25 @@ class SalesData:
         Returns:
             SalesData: Uma instância de SalesData com os dados consolidados.
         """
-        all_data: List[Dict[str, Any]] = []
-        all_columns: set[str] = set() # Usar um set para colunas únicas
-
+        all_data: List[Dict] = []
+        has_data = False
         for source in sources:
             data = source.extract_data()
-            if data:  # Certificar que data não é vazio
+            if isinstance(data, list) and data:
                 all_data.extend(data)
-                for row in data:
-                    all_columns.update(row.keys()) # Adiciona todas as colunas do row ao set
+                has_data = True
+            elif isinstance(data, list) and not data:
+                print(f"Aviso: {source} retornou uma lista de dados vazia.")
+            else:
+                print(f"Aviso: extract_data de {source} não retornou uma lista.")
 
-        available_columns = sorted(list(all_columns)) # Ordena as colunas
-        
-        # Preencher dados faltantes com None
-        consolidated_data: List[Dict[str, Optional[Any]]] = []
-        for row in all_data:
-            new_row: Dict[str, Optional[Any]] = {}
-            for col in available_columns:
-                new_row[col] = row.get(col, None) # Usar .get() para evitar KeyError
-            consolidated_data.append(new_row)
+        header_map = {}
+        if has_data:
+            header_map = SalesData.consolidate_header(sources)
 
-        return cls(consolidated_data, available_columns)
-
+        statistics = SalesData.compute_basic_statistics(all_data)
+        return {"data": all_data, "statistics": statistics, "header_map": header_map}
+    
     def get_data_by_columns(self, columns: List[str]) -> List[Dict[str, Any]]:
         """
         Retorna os dados apenas com as colunas especificadas.

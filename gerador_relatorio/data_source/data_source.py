@@ -121,5 +121,8 @@ class LocalDataSource(DataSource):
             raise DataSourceError(f"Arquivo não encontrado: {self.location}")
         except csv.Error as e:
             raise DataSourceError(f"Erro ao ler o arquivo CSV: {e}")
+        except UnicodeDecodeError as e:
+            raise DataSourceError(f"Erro de encoding ao ler o arquivo CSV: {e}")
+        
         return data
      

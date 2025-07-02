@@ -4,6 +4,7 @@ Ele orquestra o fluxo de trabalho, desde a leitura da configuração até a gera
 """
 
 import json
+from pathlib import Path
 from typing import List
 
 from gerador_relatorio.data_source.data_source import DataSource, WebDataSource, LocalDataSource
@@ -18,9 +19,19 @@ def main():
     Função principal para executar a POC de geração de relatórios de vendas.
     """
     # 1. Carregar a Configuração
-
+    config_data = None
+    possible_paths = [
+    Path('config.json'),
+    Path('gerador_relatorio/config.json')
+]
+    for path in possible_paths:
+        if path.exists():
+            print(f"Arquivo de configuração encontrado em: {path.resolve()}")
+            config_path = path
+        else:
+            print(f"Arquivo de configuração não encontrado em: {path.resolve()}")    
     try:
-        with open('config.json', 'r') as f:
+        with open(path, 'r') as f:
             config_data = json.load(f)
     except FileNotFoundError:
         print("Erro: Arquivo de configuração 'config.json' não encontrado.")

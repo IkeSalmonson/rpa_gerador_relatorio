@@ -25,7 +25,7 @@ class TextReportFormatter(ReportFormatter):
         report = "--- Relatório de Vendas ---\n\n"
 
         # Obter as colunas disponíveis
-        columns = data.available_columns
+        columns =  data['header_map'].keys()
 
         # Criar o cabeçalho
         header = " | ".join(columns)
@@ -33,9 +33,9 @@ class TextReportFormatter(ReportFormatter):
         report += "-" * len(header) + "\n"
 
         # Adicionar os dados
-        start_index = 1 if data.data and self._is_header_row(data.data[0]) else 0  # Nova linha
-        for i in range(start_index, len(data.data)):                               # Nova linha
-            sale = data.data[i]                                                    # Nova linha
+        start_index = 1 if data['data'] and self._is_header_row(data['data'][0]) else 0  # Nova linha
+        for i in range(start_index, len(data['data'])):                               # Nova linha
+            sale = data['data'][i]                                                    # Nova linha
             row = " | ".join(str(sale.get(col, 'N/A')) for col in columns)
             report += row + "\n"
         return report
