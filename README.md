@@ -1,6 +1,6 @@
 # Gerador de Relatórios de Vendas
 
-## 📝 Descrição
+## 📝 Sobre o Projeto
 Este projeto é um sistema que gera relatórios de vendas a partir de diferentes fontes de dados. Ele foi desenvolvido para automatizar a geração de relatórios para pequenos negócios, simplificando o processo de consolidação e apresentação de dados de vendas.
 
 ## 💻 Tecnologias Utilizadas
@@ -9,24 +9,24 @@ Este projeto é um sistema que gera relatórios de vendas a partir de diferentes
 - Docker
 - Pytest 
 
-## Funcionalidades
+## 🛠️ Funcionalidades
 
-* **Leitura de Dados de Múltiplas Fontes:** O sistema é capaz de ler dados de vendas de diferentes fontes, como arquivos CSV locais e (futuramente) fontes de dados web.
+* **Leitura de Dados de Múltiplas Fontes:** O sistema é capaz de ler dados de vendas de diferentes fontes, como arquivos CSV locais e (💡 planejada para o futuro) fontes de dados web.
 * **Consolidação de Dados:** Os dados de vendas de diferentes fontes são consolidados em uma estrutura unificada para facilitar a geração de relatórios.
 * **Geração de Relatórios em Diferentes Formatos:** O sistema pode gerar relatórios de vendas em diferentes formatos, como texto simples e HTML.
 * **Configuração Flexível:** As fontes de dados a serem utilizadas são configuradas externamente através de um arquivo JSON, permitindo fácil adaptação a diferentes cenários.
-* **Distribuição Simplificada:** A aplicação é distribuída como um executável, eliminando a necessidade de instalar Python ou bibliotecas.
+* **Distribuição Simplificada:**  💡(planejada para o futuro) A aplicação é distribuída como um executável, eliminando a necessidade de instalar Python ou bibliotecas.
 
 ## 🚀 Como Executar
 
-1.  **Configurar as Fontes de Dados:**
+### **Configurar as Fontes de Dados:**
 
-    * Crie um arquivo `config.json` no mesmo diretório do executável para especificar as fontes de dados a serem utilizadas.
+    * Crie um arquivo `config.json` no mesmo diretório do projeto ou executável para especificar as fontes de dados a serem utilizadas.
     * Consulte o exemplo de `config.json` abaixo para a estrutura do arquivo.
     * Certifique-se de que os caminhos para os arquivos CSV estejam corretos.
 
 
-### Exemplo de `config.json`
+#### ⚙️ Exemplo de config.json
 
 ```json
 {
@@ -46,32 +46,31 @@ Este projeto é um sistema que gera relatórios de vendas a partir de diferentes
   ]
 }
 ```
+---
+### **Executar a Aplicação:**
 
-2.  **Executar a Aplicação:**
-
-  ### Execução para cliente
+  #### Execução para cliente*
+  (planejada para o futuro 💡) <br>
 
     * Execute o arquivo executável.
     * A aplicação irá ler as fontes de dados configuradas, consolidar os dados e gerar os relatórios em formato texto e HTML, exibindo-os no console.
 
 
 
-### Execução para desenvolvedor 
+#### ▶️ Execução para Desenvolvedor
 
 **Pré-requisitos:**
-  -  Docker 
- <br> Build :  
+  -  Docker instalado localmente
+
+ 1. Build da imagem docker do dockerfile :  
  ```sh
  docker build -t gerador_relatorio . 
  ```
-Execução da aplicação 
-<br> Container: 
-
+2. Inicializar o Container: 
 ```sh
-  docker run -it -v .$(pwd)/:/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
+  docker run -it --rm -v $(pwd)/:/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
 ```
-
-Dentro do container execute: 
+3. Executar o main.py dentro do container: 
 ```sh
   python /gerador_relatorio/main.py
 ```
