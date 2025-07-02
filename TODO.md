@@ -9,8 +9,6 @@
     ### Use Cache full log on console
     docker build --progress=plain -t gerador_relatorio .
 
-
-
 ## Docker Dev containers 
 
 docker run -it -v $(pwd):/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
