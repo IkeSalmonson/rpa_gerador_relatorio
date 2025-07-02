@@ -1,5 +1,5 @@
 import pytest
-from gerador_relatorios.data_source.data_source import LocalDataSource, DataSourceError
+from gerador_relatorio.data_source.data_source import LocalDataSource, DataSourceError
 import csv
 from typing import List, Dict
 

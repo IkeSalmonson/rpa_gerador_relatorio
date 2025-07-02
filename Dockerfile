@@ -2,7 +2,7 @@ FROM python:3.12.3-alpine3.19
 #python_playground
 
 
-WORKDIR /usr/share/rpa_projet_relatorio
+WORKDIR /usr/share/rpa_projeto_relatorio
 COPY ./requirements.txt ./requirements.txt
 RUN  pip install -r ./requirements.txt
 
@@ -13,4 +13,4 @@ COPY ./setup.py ./
 COPY ./pyproject.toml ./
 COPY ./gerador_relatorio ./gerador_relatorio
 
-#RUN pip install -e ../ 
+RUN pip install -e ./ 

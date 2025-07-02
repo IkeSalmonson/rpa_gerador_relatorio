@@ -2,8 +2,8 @@ import unittest
 from unittest.mock import Mock
 from typing import List, Dict
  
-from gerador_relatorios.sales_data.sales_data import SalesData
-from gerador_relatorios.data_source.data_source import DataSource 
+from gerador_relatorio.sales_data.sales_data import SalesData
+from gerador_relatorio.data_source.data_source import DataSource 
 
 #### Checar implementações dos testes 
 

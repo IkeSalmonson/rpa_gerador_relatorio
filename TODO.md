@@ -13,7 +13,7 @@
 
 ## Docker Dev containers 
 
-docker run -it -v .$(pwd)/:/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
+docker run -it -v $(pwd):/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
     
  // docker run -it  gerador_relatorio sh      
 
