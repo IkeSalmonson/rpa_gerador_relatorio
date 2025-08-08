@@ -11,7 +11,7 @@ Este documento registra as decisões arquiteturais significativas tomadas durant
 5.  [ADR-005: Abstração de Fontes de Dados](#adr-005-abstração-de-fontes-de-dados)
 6.  [ADR-006: Tratamento de Cabeçalho em Arquivos de Dados](#adr-006-tratamento-de-cabeçalho-em-arquivos-de-dados)
 7.  [ADR-007: Distribuição como Executável](#adr-007-distribuição-como-executável)
-
+8.  [ADR-008: Considerar a migração para Pandas para manipulação de dados](#adr-008-Considerar-a-migração-para-Pandas-para-manipulação-de-dados)
 ---
 
 ## ADR-001: Escolha da Linguagem de Programação
@@ -177,3 +177,22 @@ Este documento registra as decisões arquiteturais significativas tomadas durant
     * A aplicação será empacotada em um executável usando PyInstaller.
     * Os usuários poderão executar a aplicação sem instalar o Python ou bibliotecas.
     * O tamanho do arquivo de distribuição será maior.
+
+
+## ADR-008: Considerar a migração para Pandas para manipulação de dados
+* **Data:** 2025-08-08
+* **Status:** Proposto.
+* **Contexto:**
+    A arquitetura atual do `rpa_gerador_relatorio` utiliza listas de dicionários e um dicionário de resultados consolidados para manipular os dados extraídos das diversas fontes. Essa abordagem é simples, eficaz e suficiente para conjuntos de dados de pequeno a médio porte, onde o desempenho de manipulação de dados em Python puro é adequado.
+* **Decisão:**
+    A decisão atual é **manter a implementação baseada em dicionários e listas**. Essa abordagem atende aos requisitos atuais de desempenho e complexidade, mantendo a base de código leve e sem dependências externas adicionais, como o Pandas. A refatoração para uma estrutura de dados mais robusta será considerada como uma melhoria futura, caso os requisitos de desempenho, o volume de dados ou a complexidade das análises aumentem.
+* **Consequências:**
+    * **Positivas:**
+        * Manutenção da simplicidade e leveza do projeto.
+        * Não há novas dependências externas.
+        * O código é mais direto para quem não tem familiaridade com o ecossistema Pandas.
+    * **Negativas:**
+        * Pode haver gargalos de desempenho caso o volume de dados cresça significativamente, pois as operações de loop em Python puro são mais lentas que as vetorizadas do Pandas.
+        * A implementação de análises estatísticas mais complexas exigirá código manual e verboso.
+        * A integração com ferramentas de análise de dados ou visualização será menos direta do que com DataFrames do Pandas.
+ 

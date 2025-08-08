@@ -92,3 +92,8 @@ order_id | product_id | product_name | category | price | quantity | discount | 
 7 | 160 | Pão Francês | Alimentos | 188.84 | 1 | 0.01 | 2025-04-10 | 1008 | Pietro Vieira | Cartão de Crédito | 1
 
 ---
+
+
+# Melhorias Futuras
+  - **utilizar Pandas**: O projeto foi arquitetado com simplicidade e desempenho em mente para conjuntos de dados de pequeno a médio porte. Atualmente, a manipulação de dados é feita com listas e dicionários Python padrão, uma abordagem leve e direta. Como melhoria futura, caso o volume de dados ou a complexidade das análises cresça, a implementação poderá ser refatorada para utilizar a biblioteca Pandas.
+  
