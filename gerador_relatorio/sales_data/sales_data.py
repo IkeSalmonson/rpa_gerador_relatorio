@@ -5,7 +5,7 @@ os dados de vendas extraídos das diferentes fontes de dados.
 
 from typing import List, Dict, Any, Optional
 from collections import defaultdict
-
+import numbers
 from gerador_relatorio.data_source.data_source import DataSource
 
 
@@ -32,29 +32,49 @@ class SalesData:
 
     @staticmethod
     def consolidate_header(sources: List[DataSource]) -> Dict[str, List[DataSource]]:
-        header_map: Dict[str, List[DataSource]] = {}
+        header_map: Dict[str, List[DataSource]] = defaultdict(list)
         for source in sources:
             data = source.extract_data()
             if data:  # Check if data is not empty
-                for column in data[0].keys():
-                    if column not in header_map:
-                        header_map[column] = []
-                    header_map[column].append(source)
-        return header_map
+                source_columns = set().union(*(row.keys() for row in data))
+                for column in source_columns:
+                    if source not in header_map[column]:
+                        header_map[column].append(source)
+        return dict(header_map)
+ 
     @staticmethod
     def compute_basic_statistics(data: List[Dict]) -> Dict[str, Dict[str, Any]]:
         statistics: Dict[str, Dict[str, Any]] = {}
         if not data:
             return statistics
 
-        for column in data[0].keys():
+        # Itera sobre todas as chaves de todas as linhas para garantir que todas as colunas
+        # sejam consideradas, mesmo se não estiverem na primeira linha.
+        all_columns = set().union(*(row.keys() for row in data))
+
+        for column in all_columns:
             values = [row.get(column) for row in data]
+
+            # Filtra os valores para incluir apenas os que não são None
+            non_null_values = [v for v in values if v is not None]
+
+            # Verifica se todos os valores não nulos são numéricos
+            is_numeric = all(isinstance(v, numbers.Number) for v in non_null_values)
+
+            col_min = None
+            col_max = None
+            if is_numeric and non_null_values:
+                col_min = min(non_null_values)
+                col_max = max(non_null_values)
+
             statistics[column] = {
-                "min": min((v for v in values if v is not None), default=None),
-                "max": max((v for v in values if v is not None), default=None),
+                "min": col_min,
+                "max": col_max,
                 "blank_count": sum(1 for v in values if v is None),
             }
         return statistics
+ 
+
 
 
     @staticmethod

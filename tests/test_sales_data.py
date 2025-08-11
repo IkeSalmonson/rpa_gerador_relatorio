@@ -268,7 +268,7 @@ class TestSalesData(unittest.TestCase):
         sources = [mock_source1, mock_source2]
         result = SalesData.consolidate_data(sources)
         
-        self.assertDictEqual(result["data"], [])
+        self.assertEqual(result["data"], [])
         self.assertDictEqual(result["statistics"], {})
         self.assertDictEqual(result["header_map"], {})
 
