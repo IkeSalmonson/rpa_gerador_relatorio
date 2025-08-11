@@ -12,8 +12,13 @@
 ## Docker Dev containers 
 
 docker run -it -v $(pwd):/usr/share/rpa_projeto_relatorio/ gerador_relatorio sh
+
+
     
  // docker run -it  gerador_relatorio sh      
 
 # Run tests on source folder (/usr/share/gerador_relatorio) 
 pytest ../
+
+# Run app on source folder (/usr/share/gerador_relatorio) 
+python gerador_relatorio/main.py

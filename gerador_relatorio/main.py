@@ -65,7 +65,7 @@ def main():
     html_report = SalesReport(sales_data, html_formatter)
     text_report = SalesReport(sales_data, text_formatter)
 
-    #print("Relatório HTML:\n", html_report.generate_report())
+    print("Relatório HTML:\n", html_report.generate_report())
     #print("\nRelatório Texto:\n", text_report.generate_report())
 
     csv_formatter = CSVReportFormatter()
