@@ -1,5 +1,3 @@
-# gerador_relatorio/sales_report/html_report_formatter.py
-
 """
 Este módulo define a classe HTMLReportFormatter para formatar relatórios em HTML.
 """
