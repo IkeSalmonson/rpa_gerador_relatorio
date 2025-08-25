@@ -8,7 +8,8 @@ from pathlib import Path
 from typing import List
 import os
 
-from gerador_relatorio.data_source.data_source import DataSource, WebDataSource, LocalDataSource
+from gerador_relatorio.data_source.data_source import DataSource, LocalDataSource
+from gerador_relatorio.data_source.web_data_source import WebDataSource
 from gerador_relatorio.sales_data.sales_data import SalesData
 from gerador_relatorio.sales_report.sales_report import SalesReport
 from gerador_relatorio.sales_report.html_report_formatter import HTMLReportFormatter
@@ -46,9 +47,15 @@ def main():
         source_type = source_data.get('type')
         source_location = source_data.get('location')
         source_credentials = source_data.get('credentials')
+        source_name = source_data.get('name')
 
         if source_type == 'web':
-            sources.append(WebDataSource(location=source_location, credentials=source_credentials))
+            source_data_key = source_data.get('data_key')
+            if not source_data_key:
+                print(f"Erro: 'data_key' não especificado para a fonte web {source_name}. Ignorando.")
+                continue
+            sources.append(WebDataSource(name=source_name , location=source_location, data_key = source_data_key ,credentials=source_credentials))
+
         elif source_type == 'local':
             sources.append(LocalDataSource(location=source_location))
         else:

@@ -41,33 +41,6 @@ class DataSource(ABC):
         pass  # Método abstrato, não faz nada na classe base
 
 
-class WebDataSource(DataSource):
-    """
-    Classe para representar uma fonte de dados web.
-    Herda da classe DataSource.
-    """
-
-    def __init__(self, location: str, credentials: dict = None) -> None:
-        """
-        Inicializa uma nova instância de WebDataSource.
-
-        Args:
-            location (str): A URL da fonte de dados web.
-            credentials (dict, opcional): Credenciais de acesso, se necessário.
-        """
-        super().__init__(type="web", location=location, credentials=credentials)
-
-    def extract_data(self) -> list:
-        """
-        Extrai dados da fonte de dados web.
-        (Implementação a ser adicionada)
-
-        Returns:
-            list: Uma lista de dicionários representando os dados extraídos.
-        """
-        # Implementação da extração de dados web (usando Puppeteer)
-        return []  # Por enquanto, retorna uma lista vazia
-
 
 #### Mover para o cabecalho do arquivo
 import csv

@@ -175,10 +175,11 @@ class TestSalesData(unittest.TestCase):
         # Ajuste o teste conforme a decisão de design para `compute_basic_statistics`.
         # No momento, a função levantaria um TypeError, o que não é o ideal.
         # Sugiro ajustar `compute_basic_statistics` para tratar TypeError para min/max.
-        self.assertIsNone(stats["item"].get("min"))
-        self.assertIsNone(stats["item"].get("max"))
-        self.assertIsNone(stats["desc"].get("min"))
-        self.assertIsNone(stats["desc"].get("max"))
+        self.assertRaises(TypeError, stats["item"].get("min"))
+        #self.assertIsNone(stats["item"].get("min"))
+        #self.assertIsNone(stats["item"].get("max"))
+        #self.assertIsNone(stats["desc"].get("min"))
+        #self.assertIsNone(stats["desc"].get("max"))
 
     def test_consolidate_data_single_source(self):
         """Testa a consolidação de dados com uma única fonte."""

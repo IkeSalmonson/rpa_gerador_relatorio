@@ -3,7 +3,13 @@
       {
         "type": "local",
         "location": "./data_example/vendas_especificas.csv"
-      }
-
+      }, 
+    {
+      "type": "web",
+      "name": "DummyJSON",
+      "location": "https://dummyjson.com/products",
+      "data_key": "products",
+      "credentials": {}
+    }
     ]
-  }
+}
