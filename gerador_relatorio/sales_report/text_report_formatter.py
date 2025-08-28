@@ -1,53 +1,75 @@
 """
-Este módulo define a classe TextReportFormatter para formatar relatórios em texto.
+Este módulo define a classe TextReportFormatter para formatar relatórios em texto simples.
 """
 
-from gerador_relatorio.sales_report.report_formatter import ReportFormatter
-from gerador_relatorio.sales_data.sales_data import SalesData
 from typing import Dict, Any, List
-
+from gerador_relatorio.sales_report.report_formatter import ReportFormatter
 
 class TextReportFormatter(ReportFormatter):
     """
     Formatador de relatório para texto simples.
     """
 
-    def format_report(self, data: SalesData) -> str:
+    def format_report(self, consolidated_data: Dict[str, Any]) -> str:
         """
-        Formata os dados de vendas em um relatório de texto simples.
+        Formata os dados e as estatísticas de vendas em um relatório de texto completo.
 
         Args:
-            data (SalesData): Os dados de vendas a serem formatados.
+            consolidated_data (Dict[str, Any]): Dicionário com os dados consolidados,
+                                                incluindo 'data', 'statistics' e 'header_map'.
 
         Returns:
             str: O relatório em formato de texto.
         """
-        report = "--- Relatório de Vendas ---\n\n"
+        report_parts = [
+            "====================== Relatório de Vendas ======================\n",
+            self._format_data_section(consolidated_data),
+            "\n" + "=" * 59,
+            "\n" + self._format_statistics_section(consolidated_data)
+        ]
+        
+        return "".join(report_parts)
 
-        # Obter as colunas disponíveis
-        columns =  data['header_map'].keys()
+    def _format_data_section(self, consolidated_data: Dict[str, Any]) -> str:
+        """Gera a seção de dados do relatório de texto."""
+        data = consolidated_data.get("data", [])
+        header_map = consolidated_data.get("header_map", {})
+        
+        if not data:
+            return "Nenhum dado de vendas disponível.\n"
 
-        # Criar o cabeçalho
-        header = " | ".join(columns)
-        report += header + "\n"
-        report += "-" * len(header) + "\n"
+        columns = list(header_map.keys())
+        
+        # Cria o cabeçalho
+        data_text = ["Dados de Vendas:\n"]
+        header_line = " | ".join(columns)
+        data_text.append(header_line)
+        data_text.append("-" * len(header_line))
 
-        # Adicionar os dados
-        start_index = 1 if data['data'] and self._is_header_row(data['data'][0]) else 0  # Nova linha
-        for i in range(start_index, len(data['data'])):                               # Nova linha
-            sale = data['data'][i]                                                    # Nova linha
-            row = " | ".join(str(sale.get(col, 'N/A')) for col in columns)
-            report += row + "\n"
-        return report
+        # Adiciona as linhas de dados
+        for row in data:
+            row_values = [str(row.get(col, '')) for col in columns]
+            data_text.append(" | ".join(row_values))
+        
+        return "\n".join(data_text)
 
-    def _is_header_row(self, row: Dict[str, Any]) -> bool:                        # Nova função
-        """
-        Verifica se uma linha é uma linha de cabeçalho (todos os valores são strings).
+    def _format_statistics_section(self, consolidated_data: Dict[str, Any]) -> str:
+        """Gera a seção de estatísticas do relatório de texto."""
+        statistics = consolidated_data.get("statistics", {})
 
-        Args:
-            row (Dict[str, Any]): A linha a ser verificada.
+        if not statistics:
+            return "Nenhuma estatística disponível.\n"
+        
+        stats_text = ["Estatísticas:\n"]
+        for column, metrics in statistics.items():
+            stats_text.append(f"  - Coluna: {column}")
+            min_val = metrics.get('min')
+            max_val = metrics.get('max')
+            blank_count = metrics.get('blank_count')
 
-        Returns:
-            bool: True se a linha for um cabeçalho, False caso contrário.
-        """
-        return all(isinstance(value, str) for value in row.values())               # Nova linha
+            stats_text.append(f"    Mínimo: {min_val if min_val is not None else 'N/A'}")
+            stats_text.append(f"    Máximo: {max_val if max_val is not None else 'N/A'}")
+            stats_text.append(f"    Nulos: {blank_count if blank_count is not None else 0}")
+            stats_text.append("")  # Linha em branco para separar as métricas
+
+        return "\n".join(stats_text)

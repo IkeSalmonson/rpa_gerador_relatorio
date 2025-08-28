@@ -44,35 +44,75 @@ class SalesData:
  
     @staticmethod
     def compute_basic_statistics(data: List[Dict]) -> Dict[str, Dict[str, Any]]:
+        """
+        Calcula estatísticas básicas para cada coluna nos dados,
+        lidando com tipos de dados mistos e strings numéricas.
+        """
         statistics: Dict[str, Dict[str, Any]] = {}
         if not data:
             return statistics
-
-        # Itera sobre todas as chaves de todas as linhas para garantir que todas as colunas
-        # sejam consideradas, mesmo se não estiverem na primeira linha.
+    
         all_columns = set().union(*(row.keys() for row in data))
-
+    
         for column in all_columns:
             values = [row.get(column) for row in data]
-
-            # Filtra os valores para incluir apenas os que não são None
+            
+            # Filtra os valores não nulos e tenta convertê-los para números
+            numeric_values = []
+            for v in values:
+                if v is not None:
+                    try:
+                        # Tenta converter para float
+                        numeric_values.append(float(v))
+                    except (ValueError, TypeError):
+                        # Ignora valores que não são numéricos
+                        pass
+                    
             non_null_values = [v for v in values if v is not None]
-
-            # Verifica se todos os valores não nulos são numéricos
-            is_numeric = all(isinstance(v, numbers.Number) for v in non_null_values)
-
+    
             col_min = None
             col_max = None
-            if is_numeric and non_null_values:
-                col_min = min(non_null_values)
-                col_max = max(non_null_values)
-
+            
+            if numeric_values:
+                col_min = min(numeric_values)
+                col_max = max(numeric_values)
+            
             statistics[column] = {
                 "min": col_min,
                 "max": col_max,
                 "blank_count": sum(1 for v in values if v is None),
             }
-        return statistics
+        return statistics        
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+        
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
  
 
 
