@@ -1,2 +1,4 @@
 faker 
 pytest
+requests
+requests_mock
