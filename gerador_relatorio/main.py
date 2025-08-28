@@ -4,6 +4,7 @@ Ele orquestra o fluxo de trabalho, desde a leitura da configuração até a gera
 """
 
 import json
+import sys
 from pathlib import Path
 from typing import List
 import os
@@ -22,26 +23,50 @@ def main():
     """
     # 1. Carregar a Configuração
     config_data = None
-    possible_paths = [
-    Path('config.json'),
-    Path('gerador_relatorio/config.json')
-]
-    for path in possible_paths:
-        if path.exists():
-            print(f"Arquivo de configuração encontrado em: {path.resolve()}")
-            config_path = path
-        else:
-            print(f"Arquivo de configuração não encontrado em: {path.resolve()}")    
+    
+    # Verifica se o programa está rodando como um executável do PyInstaller
+    if getattr(sys, 'frozen', False):
+        # Caminho base é o diretório temporário do PyInstaller
+        base_path = sys._MEIPASS
+        config_path = os.path.join(base_path, 'config.json')
+        print(f"Executável do PyInstaller detectado. Procurando config.json em: {config_path}")
+        
+        # Adicionando uma verificação extra para o caso de o arquivo estar na raiz do executável.
+        if not os.path.exists(config_path):
+            base_path = os.path.dirname(sys.executable)
+            config_path = os.path.join(base_path, 'config.json')
+            print(f"Config não encontrada em _MEIPASS, tentando o diretório do executável: {config_path}")
+    
+    else:
+        # Caminho para ambiente de desenvolvimento normal
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        possible_paths = [
+            Path(os.path.join(base_path, 'config.json')),
+            Path(os.path.join(base_path, '../config.json'))
+        ]
+        config_path = None
+        for path in possible_paths:
+            if path.exists():
+                config_path = path
+                break
+        if not config_path:
+            print("Erro: Arquivo de configuração 'config.json' não encontrado em ambiente de desenvolvimento.")
+            return
+    
     try:
-        with open(path, 'r') as f:
+        if not config_path:
+            raise FileNotFoundError("Não foi possível encontrar o arquivo de configuração.")
+        
+        print(f"Arquivo de configuração final: {config_path}")
+        with open(config_path, 'r') as f:
             config_data = json.load(f)
-    except FileNotFoundError:
-        print("Erro: Arquivo de configuração 'config.json' não encontrado.")
+        
+    except FileNotFoundError as e:
+        print(f"Erro: {e}")
         return
     except json.JSONDecodeError:
         print("Erro: Arquivo de configuração 'config.json' inválido.")
         return
-
     sources: List[DataSource] = []
     for source_data in config_data.get('sources', []):
         source_type = source_data.get('type')

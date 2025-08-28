@@ -22,3 +22,9 @@ pytest ../
 
 # Run app on source folder (/usr/share/gerador_relatorio) 
 python gerador_relatorio/main.py
+
+# Create executable 
+pip install  pyinstaller
+apk add binutils 
+pyinstaller --name "rpa-gerador-relatorio" --console --add-data "gerador_relatorio/config.json:." gerador_relatorio/main.py
+ 

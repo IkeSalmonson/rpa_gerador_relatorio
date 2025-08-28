@@ -4,7 +4,9 @@ WebDataSource e LocalDataSource para representar diferentes fontes de dados.
 """
 
 from abc import ABC, abstractmethod
-
+import os
+import sys
+from pathlib import Path
 
 class DataSource(ABC):
     """
@@ -84,12 +86,22 @@ class LocalDataSource(DataSource):
             list: Uma lista de dicionários representando os dados extraídos.
         """
         # Implementação da leitura de dados de arquivos locais (CSV, etc.)    def extract_data(self) -> List[Dict]:
-        data = []
         try:
-            with open(self.location, 'r', encoding='utf-8') as file:  # Ajuste a codificação se necessário
+            base_dir = Path(os.getcwd())
+            
+            # 2. Combinar o caminho base com o caminho relativo do arquivo de dados
+            full_path = base_dir.joinpath(self.location)
+            
+            # 3. Verificar se o arquivo existe
+            if not full_path.exists():
+                raise DataSourceError(f"Arquivo não encontrado: {full_path}")
+                
+            # 4. Ler o arquivo CSV
+            data = []
+            with open(full_path, 'r', encoding='utf-8') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
-                    data.append(dict(row))  # Converte OrderedDict para dict
+                    data.append(dict(row))
         except FileNotFoundError:
             raise DataSourceError(f"Arquivo não encontrado: {self.location}")
         except csv.Error as e:
